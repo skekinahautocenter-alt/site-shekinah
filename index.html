@@ -685,8 +685,8 @@
                 </div>
 
                 <div class="hero-promotion">
-                    <!-- Banner: substituir assets/banner-home.svg pela arte de marketing de 1080 x 1080 px.
-                         Manter width/height e atualizar o alt para descrever a campanha. -->
+                    <!-- O banner cadastrado no ADM é carregado pela API.
+                         Esta arte local permanece como padrão se não houver campanha disponível. -->
                     <a class="promotion-banner js-whatsapp" href="https://wa.me/559293022416" target="_blank" rel="noopener noreferrer" aria-label="Consultar pneus, peças e serviços no WhatsApp">
                         <img src="assets/banner-home.svg" width="1080" height="1080" alt="Auto Center Shekinah. Pneus, peças e serviços. Cuidado completo para o seu carro." fetchpriority="high">
                     </a>
@@ -1073,6 +1073,41 @@
             });
         }
 
+        async function loadHomeBanner() {
+            const image = document.querySelector(".promotion-banner img");
+            const link = document.querySelector(".promotion-banner");
+            if (!image || !link) return;
+            try {
+                const response = await fetch(`${API_URL}/banner`, { cache: "no-store", signal: AbortSignal.timeout(10000) });
+                if (!response.ok) return;
+                const { banner } = await response.json();
+                if (!banner || banner.width !== 1080 || banner.height !== 1080 || typeof banner.altText !== "string") return;
+                const url = new URL(banner.imageUrl, `${API_URL}/`);
+                if (url.origin !== new URL(API_URL).origin || url.pathname !== "/api/banner/image") return;
+                const preview = new Image();
+                await new Promise((resolve, reject) => {
+                    const timer = setTimeout(() => reject(new Error("Banner timeout")), 10000);
+                    preview.onload = () => { clearTimeout(timer); resolve(); };
+                    preview.onerror = () => { clearTimeout(timer); reject(new Error("Banner unavailable")); };
+                    preview.src = url.href;
+                });
+                if (preview.naturalWidth !== 1080 || preview.naturalHeight !== 1080) return;
+                const fallback = image.getAttribute("src");
+                const fallbackAlt = image.alt;
+                const fallbackLabel = link.getAttribute("aria-label");
+                image.addEventListener("error", () => {
+                    image.src = fallback;
+                    image.alt = fallbackAlt;
+                    link.setAttribute("aria-label", fallbackLabel);
+                }, { once: true });
+                image.src = url.href;
+                image.alt = banner.altText;
+                link.setAttribute("aria-label", `${banner.altText}. Falar no WhatsApp`);
+            } catch {
+                // Keep the local banner if the API is unavailable or no campaign exists.
+            }
+        }
+
         function setupWhatsAppLinks() {
             document.querySelectorAll(".js-whatsapp").forEach(link => {
                 link.href = getWhatsAppLink(WELCOME_MSG);
@@ -1085,6 +1120,7 @@
             document.getElementById("currentYear").textContent = new Date().getFullYear();
             setupMenu();
             setupWhatsAppLinks();
+            loadHomeBanner();
             setupCarousel();
             setupServiceCarousel();
             loadProducts();

@@ -4,11 +4,16 @@ Site estático em HTML, CSS e JavaScript. Para pré-visualizar, sirva a raiz com
 
 ## Banner da página inicial
 
-- O espaço aceita uma arte quadrada de **1080 × 1080 pixels** e mantém proporção **1:1** em desktop e celular. A exibição se ajusta à tela; não fica fixa em 1080 pixels de largura.
-- `assets/banner-home.svg` é uma arte base provisória, sem oferta ou preço, até o marketing fornecer a campanha final.
-- Para trocar a arte, adicione o PNG, JPG, WebP ou SVG em `assets/` e atualize o `src` da imagem dentro de `.promotion-banner` no `index.html`.
-- Mantenha `width="1080" height="1080"` e atualize o `alt` e o `aria-label` do link para refletir a campanha. O CSS usa `object-fit: contain` para não recortar a arte.
-- Publique a pasta `assets/` junto com `index.html`.
+- A área é quadrada e responsiva (proporção 1:1), preparada para artes de **1080 × 1080 pixels**, sem recorte.
+- As campanhas agora são enviadas pelo **Shekinah-ADM**, na seção **Banner do site**, sem editar o HTML a cada troca.
+- O site lê `GET /api/banner` na mesma API do catálogo e pré-carrega a imagem antes de substituir a arte padrão. Sem banner, com API indisponível ou imagem inválida, mantém `assets/banner-home.svg`.
+- O texto alternativo vem da descrição preenchida no painel. O destino do clique continua sendo o WhatsApp da loja.
+- O banner novo aparece ao abrir/atualizar a página. A versão da URL muda a cada publicação, e a API revalida a imagem por ETag.
+- Publique `assets/` junto com `index.html`; a arte local é a alternativa em caso de falha.
+
+### Dependência de publicação
+
+A API precisa receber as rotas de banner e a migração, e o ADM precisa receber seu editor e a autenticação no servidor. Consulte os READMEs de `shekinah-api` e `Shekinah-ADM` para configurar as variáveis e coordenar a publicação. Até a API ser atualizada, esta página continua exibindo a arte padrão.
 
 ## Atendimento por WhatsApp
 
