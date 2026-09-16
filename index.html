@@ -91,7 +91,8 @@
         }
         .hero-grid {
             display: grid;
-            grid-template-columns: 1.2fr .8fr;
+            grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+            align-items: center;
             gap: 2rem;
             max-width: 1200px;
             margin: 0 auto;
@@ -165,40 +166,31 @@
         .trust-item i { font-size: 1.8rem; color: var(--yellow); margin-bottom: 0.5rem; }
         .trust-item strong { display: block; color: var(--text-light); }
         .trust-item p { color: var(--text-muted); font-size: .9rem; }
-        .quote-card, .appointment-form, .contact-form, .contact-info {
+        .contact-cta, .contact-info {
             background: rgba(22,22,22,.96);
             border: 2px solid var(--yellow);
             border-radius: 20px;
             padding: 2rem;
             box-shadow: 0 20px 40px rgba(0,0,0,0.45);
         }
-        .quote-card { animation: fadeInUp .9s ease .15s both; }
-        .quote-card h3, .contact-info h3 { color: var(--yellow); margin-bottom: .5rem; font-size: 1.5rem; }
-        .badge {
-            background: var(--yellow);
-            color: var(--black);
-            padding: 0.3rem 1rem;
-            border-radius: 999px;
-            font-size: 0.8rem;
-            font-weight: 700;
-            display: inline-block;
-            margin-bottom: 1rem;
-        }
-        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-        .form-group { margin-bottom: 1rem; }
-        .form-group label { display: block; margin-bottom: 0.3rem; color: var(--text-muted); font-size: 0.9rem; font-weight: 500; }
-        .form-group input, .form-group select, .form-group textarea {
+        .contact-cta h3, .contact-info h3 { color: var(--yellow); margin-bottom: .5rem; font-size: 1.5rem; }
+        .hero-promotion { min-width: 0; width: 100%; max-width: 560px; margin: 0 auto; }
+        .promotion-banner {
+            display: block;
             width: 100%;
-            padding: 0.85rem;
-            border: 1px solid var(--gray);
-            border-radius: 10px;
-            font-family: inherit;
-            font-size: 0.95rem;
-            background: var(--black);
-            color: var(--text-light);
+            aspect-ratio: 1 / 1;
+            background: var(--black-light);
+            border: 1px solid rgba(255,215,0,.55);
+            border-radius: 20px;
+            overflow: hidden;
         }
-        .form-group input:focus, .form-group select:focus, .form-group textarea:focus { outline: none; border-color: var(--yellow); }
-        .form-group textarea { height: 105px; resize: vertical; }
+        .promotion-banner img { display: block; width: 100%; height: 100%; object-fit: contain; }
+        .hero-promotion .cta-button { display: flex; width: 100%; margin-top: 1rem; text-align: center; }
+        .hero-grid > .trust-row { grid-column: 1 / -1; margin-top: 0; }
+        .contact-cta { display: flex; flex-direction: column; justify-content: center; align-items: flex-start; gap: 1rem; }
+        .contact-cta p { color: var(--text-muted); }
+        .contact-cta .cta-button { text-align: center; }
+        a:focus-visible, button:focus-visible { outline: 3px solid var(--yellow); outline-offset: 5px; }
         section { padding: 5rem 2rem; background: var(--black); scroll-margin-top: 84px; }
         .container { max-width: 1200px; margin: 0 auto; }
         .section-title { text-align: center; font-size: clamp(2rem, 4vw, 2.6rem); margin-bottom: 1rem; color: var(--text-light); }
@@ -280,8 +272,6 @@
         .info-item i { font-size: 1.35rem; color: var(--yellow); width: 1.8rem; margin-top: .2rem; }
         .info-item p { color: var(--text-muted); }
         .info-item strong { color: var(--text-light); }
-        .submit-btn { background: var(--yellow); color: var(--black); padding: 1rem 2rem; border: 2px solid var(--yellow); border-radius: 10px; cursor: pointer; font-weight: 800; transition: background .3s; width: 100%; font-family: inherit; }
-        .submit-btn:hover { background: var(--yellow-dark); border-color: var(--yellow-dark); }
         footer { background: var(--black); color: var(--text-light); padding: 4rem 2rem 2rem; border-top: 2px solid var(--yellow); }
         .footer-content { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 3rem; }
         .footer-section h3 { margin-bottom: 1.2rem; color: var(--yellow); font-size: 1.15rem; }
@@ -647,10 +637,10 @@
             }
             .nav-links.active { display: flex; }
             .menu-toggle { display: block; }
-            .products-grid, .features-grid, .trust-row, .form-grid, .about-stats { grid-template-columns: 1fr; }
+            .products-grid, .features-grid, .trust-row, .about-stats { grid-template-columns: 1fr; }
             .hero { padding-top: 100px; }
             .hero-grid, section { padding-left: 1rem; padding-right: 1rem; }
-            .quote-card, .appointment-form, .contact-form, .contact-info { padding: 1.3rem; }
+            .contact-cta, .contact-info { padding: 1.3rem; }
             .section-header, .cta-strip { flex-direction: column; align-items: flex-start; }
             .cta-strip { text-align: left; padding: 1.5rem; }
             .product-actions, .cta-row { flex-direction: column; }
@@ -672,7 +662,7 @@
                 <li><a href="#catalogo">Catálogo</a></li>
                 <li><a href="#servicos">Serviços</a></li>
                 <li><a href="#sobre">Sobre</a></li>
-                
+
                 <li><a href="#contato">Contato</a></li>
             </ul>
         </nav>
@@ -689,58 +679,23 @@
                     <h1>Auto center com catálogo inteligente e atendimento rápido</h1>
                     <p>Consulte pneus, peças e serviços automotivos. Peça orçamento direto no WhatsApp e combine a retirada na loja.</p>
                     <div class="cta-row">
-                        <a href="#catalogo" class="cta-button"><i class="fas fa-store"></i> Ver catálogo</a>
-                    </div>
-                    <div class="trust-row">
-                        <div class="trust-item"><i class="fas fa-credit-card"></i><strong>Pix e cartão</strong><p>Facilidade no pagamento</p></div>
-                        <div class="trust-item"><i class="fas fa-tools"></i><strong>Serviços</strong><p>Alinhamento e balanceamento</p></div>
-                        <div class="trust-item"><i class="fab fa-whatsapp"></i><strong>WhatsApp</strong><p>Orçamento sem enrolação</p></div>
+                        <a href="https://wa.me/559293022416" class="cta-button js-whatsapp" target="_blank" rel="noopener noreferrer"><i class="fab fa-whatsapp" aria-hidden="true"></i> Falar no WhatsApp</a>
+                        <a href="#catalogo" class="cta-button-outline"><i class="fas fa-store" aria-hidden="true"></i> Ver catálogo</a>
                     </div>
                 </div>
 
-                <div class="quote-card">
-                    <h3>Orçamento rápido</h3>
-                    <span class="badge">resposta rápida</span>
-                    <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Preencha e clique para enviar no WhatsApp.</p>
-                    <form id="quickQuoteForm">
-                        <div class="form-grid">
-                            <div class="form-group">
-                                <label for="nome">Seu nome</label>
-                                <input type="text" id="nome" name="nome" placeholder="Ex: Gustavo" required>
-                            </div>
-                            </div>
-                        <div class="form-group">
-                            <label for="interesse">Produto ou serviço</label>
-                            <input type="text" id="interesse" name="interesse" placeholder="Ex: pneu 175/70 R14, óleo, bateria" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="carro">Carro/Modelo</label>
-                            <input type="text" id="carro" name="carro" placeholder="Ex: HB20 2020">
-                        </div>
-                        <div class="form-grid">
-                            <div class="form-group">
-                                <label for="qtd">Quantidade</label>
-                                <select id="qtd" name="qtd">
-                                    <option>1</option><option>2</option><option selected>4</option><option>Outro</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="tipo">Preferência</label>
-                                <select id="tipo" name="tipo">
-                                    <option selected>Custo-benefício</option><option>Conforto</option><option>Durabilidade</option><option>Performance</option><option>Não sei ainda</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="obs">Observações</label>
-                            <textarea id="obs" name="obs" placeholder="Ex: quero opções + retirada na loja"></textarea>
-                        </div>
-                        <div class="cta-row">
-                            <button type="submit" class="cta-button" style="flex:2;"><i class="fab fa-whatsapp"></i> Enviar no WhatsApp</button>
-                            <button type="button" class="cta-button-outline" style="flex:1;" id="clearQuoteForm">Limpar</button>
-                        </div>
-                        <p style="margin-top: 1rem; font-size: 0.85rem; color: var(--text-muted);">WhatsApp: <strong style="color: var(--yellow);">+55 (92) 9302-2416</strong></p>
-                    </form>
+                <div class="hero-promotion">
+                    <!-- Banner: substituir assets/banner-home.svg pela arte de marketing de 1080 x 1080 px.
+                         Manter width/height e atualizar o alt para descrever a campanha. -->
+                    <a class="promotion-banner js-whatsapp" href="https://wa.me/559293022416" target="_blank" rel="noopener noreferrer" aria-label="Consultar pneus, peças e serviços no WhatsApp">
+                        <img src="assets/banner-home.svg" width="1080" height="1080" alt="Auto Center Shekinah. Pneus, peças e serviços. Cuidado completo para o seu carro." fetchpriority="high">
+                    </a>
+                    <a class="cta-button js-whatsapp" href="https://wa.me/559293022416" target="_blank" rel="noopener noreferrer"><i class="fab fa-whatsapp" aria-hidden="true"></i> Pedir orçamento no WhatsApp</a>
+                </div>
+                <div class="trust-row">
+                    <div class="trust-item"><i class="fas fa-credit-card"></i><strong>Pix e cartão</strong><p>Facilidade no pagamento</p></div>
+                    <div class="trust-item"><i class="fas fa-tools"></i><strong>Serviços</strong><p>Alinhamento e balanceamento</p></div>
+                    <div class="trust-item"><i class="fab fa-whatsapp"></i><strong>WhatsApp</strong><p>Orçamento sem enrolação</p></div>
                 </div>
             </div>
         </section>
@@ -752,7 +707,7 @@
                         <h2>Catálogo automotivo</h2>
                         <p>Pneus, peças e produtos. Somente retirada na loja • Av Timbiras 447</p>
                     </div>
-                    <a href="#home" class="cta-button-outline"><i class="fab fa-whatsapp"></i> Pedir orçamento</a>
+                    <a href="https://wa.me/559293022416" class="cta-button-outline js-whatsapp" target="_blank" rel="noopener noreferrer"><i class="fab fa-whatsapp" aria-hidden="true"></i> Pedir orçamento</a>
                 </div>
                 <div class="catalog-carousel">
                     <div class="carousel-shell">
@@ -778,7 +733,7 @@
                         <h3>Não encontrou o produto?</h3>
                         <p>Chame no WhatsApp e informe modelo do carro, ano e o que você precisa.</p>
                     </div>
-                    <a href="#home" class="cta-button"><i class="fab fa-whatsapp"></i> Pedir orçamento</a>
+                    <a href="https://wa.me/559293022416" class="cta-button js-whatsapp" target="_blank" rel="noopener noreferrer"><i class="fab fa-whatsapp" aria-hidden="true"></i> Pedir orçamento</a>
                 </div>
             </div>
         </section>
@@ -837,12 +792,11 @@
                         <div class="info-item"><i class="fab fa-whatsapp"></i><p><strong>WhatsApp</strong><br>+55 (92) 9302-2416</p></div>
                         <div class="info-item"><i class="fas fa-clock"></i><p><strong>Horário</strong><br>Consulte atendimento pelo WhatsApp</p></div>
                     </div>
-                    <form class="contact-form" id="contactForm">
-                        <div class="form-group"><label for="ctNome">Nome</label><input id="ctNome" type="text" required></div>
-                        <div class="form-group"><label for="ctAssunto">Assunto</label><input id="ctAssunto" type="text" placeholder="Ex: dúvida sobre produto" required></div>
-                        <div class="form-group"><label for="ctMensagem">Mensagem</label><textarea id="ctMensagem" required></textarea></div>
-                        <button class="submit-btn" type="submit"><i class="fab fa-whatsapp"></i> Enviar mensagem</button>
-                    </form>
+                    <div class="contact-cta">
+                        <h3>Converse com nossa equipe</h3>
+                        <p>Tire suas dúvidas, consulte a disponibilidade de produtos e solicite seu orçamento diretamente pelo WhatsApp.</p>
+                        <a href="https://wa.me/559293022416" class="cta-button js-whatsapp" target="_blank" rel="noopener noreferrer"><i class="fab fa-whatsapp" aria-hidden="true"></i> Falar com a loja no WhatsApp</a>
+                    </div>
                 </div>
             </div>
         </section>
@@ -856,17 +810,17 @@
                 <div class="social-links">
                     <a href="https://www.instagram.com/autocentershekinah_?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
                     <a href="https://www.facebook.com/profile.php?id=61573235049760" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" class="js-whatsapp" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    <a href="https://wa.me/559293022416" class="js-whatsapp" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
                 </div>
             </div>
             <div class="footer-section"><h3>Links</h3><ul><li><a href="#catalogo">Catálogo</a></li><li><a href="#servicos">Serviços</a></li><li><a href="#contato">Contato</a></li></ul></div>
             <div class="footer-section"><h3>Serviços</h3><ul><li>Pneus</li><li>Alinhamento</li><li>Balanceamento</li><li>Produtos automotivos</li></ul></div>
-            <div class="footer-section"><h3>Endereço</h3><ul><li>Av Timbiras 447</li><li>Manaus - AM</li><li><a class="js-whatsapp" href="#">Chamar no WhatsApp</a></li></ul></div>
+            <div class="footer-section"><h3>Endereço</h3><ul><li>Av Timbiras 447</li><li>Manaus - AM</li><li><a class="js-whatsapp" href="https://wa.me/559293022416">Chamar no WhatsApp</a></li></ul></div>
         </div>
         <div class="footer-bottom">© <span id="currentYear"></span> Shekinah Auto Center. Todos os direitos reservados.</div>
     </footer>
 
-    <a href="#" class="whatsapp-float js-whatsapp" aria-label="Chamar no WhatsApp"><i class="fab fa-whatsapp"></i></a>
+    <a href="https://wa.me/559293022416" class="whatsapp-float js-whatsapp" aria-label="Chamar no WhatsApp"><i class="fab fa-whatsapp"></i></a>
 
     <script>
         const WHATSAPP_NUMBER = "559293022416";
@@ -983,40 +937,9 @@
         }
 
         function quoteProduct(title) {
-            const input = document.getElementById("interesse");
-            if (input) input.value = title;
-            document.getElementById("home")?.scrollIntoView({ behavior: "smooth", block: "start" });
-            setTimeout(() => input?.focus(), 550);
+            const msg = `Olá! Vim pelo site da Shekinah Auto Center e quero um orçamento para: ${title}. Pode me informar a disponibilidade?`;
+            window.open(getWhatsAppLink(msg), "_blank", "noopener,noreferrer");
         }
-
-        function setupForms() {
-            document.getElementById("quickQuoteForm")?.addEventListener("submit", (event) => {
-                event.preventDefault();
-                const nome = document.getElementById("nome").value.trim();
-                const interesse = document.getElementById("interesse").value.trim();
-                const carro = document.getElementById("carro").value.trim();
-                const qtd = document.getElementById("qtd").value;
-                const tipo = document.getElementById("tipo").value;
-                const obs = document.getElementById("obs").value.trim();
-                const msg = `Olá! Sou ${nome}.\nVim pelo site da Shekinah Auto Center e quero orçamento.\n\n• Produto/Serviço: ${interesse}\n• Quantidade: ${qtd}\n• Preferência: ${tipo}\n• Carro/Modelo: ${carro || "não informado"}\n• Modalidade: ${MODE}\n• Endereço: ${ADDRESS}\n• Observações: ${obs || "sem observações"}`;
-                window.open(getWhatsAppLink(msg), "_blank", "noopener,noreferrer");
-            });
-
-            document.getElementById("clearQuoteForm")?.addEventListener("click", () => {
-                document.getElementById("quickQuoteForm")?.reset();
-            });
-
-            document.getElementById("contactForm")?.addEventListener("submit", (event) => {
-                event.preventDefault();
-                const nome = document.getElementById("ctNome").value.trim();
-                const assunto = document.getElementById("ctAssunto").value.trim();
-                const mensagem = document.getElementById("ctMensagem").value.trim();
-                const msg = `Olá! Sou ${nome}.\nAssunto: ${assunto}\n\n${mensagem}`;
-                window.open(getWhatsAppLink(msg), "_blank", "noopener,noreferrer");
-            });
-        }
-
-
 
         const servicesData = [
             {
@@ -1161,7 +1084,6 @@
         document.addEventListener("DOMContentLoaded", () => {
             document.getElementById("currentYear").textContent = new Date().getFullYear();
             setupMenu();
-            setupForms();
             setupWhatsAppLinks();
             setupCarousel();
             setupServiceCarousel();
