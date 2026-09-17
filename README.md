@@ -1,4 +1,4 @@
-# Site Auto Center Shekinah
+# Site Centro Automotivo Shekinah
 
 Site estático em HTML, CSS e JavaScript. Para pré-visualizar, sirva a raiz com um servidor HTTP (por exemplo, `python -m http.server 8080`).
 
