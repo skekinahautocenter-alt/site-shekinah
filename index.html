@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shekinah Auto Center - Pneus, Peças e Serviços Automotivos</title>
-    <meta name="description" content="Shekinah Auto Center: catálogo automotivo, pneus, peças, alinhamento, balanceamento e orçamento via WhatsApp.">
+    <title>Centro Automotivo Shekinah - Pneus, Peças e Serviços Automotivos</title>
+    <meta name="description" content="Centro Automotivo Shekinah: catálogo automotivo, pneus, peças, alinhamento, balanceamento e orçamento via WhatsApp.">
 
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
@@ -79,8 +79,8 @@
         }
         .hero {
             background:
-                linear-gradient(rgba(0,0,0,0.82), rgba(0,0,0,0.84)),
-                url('https://i.im.ge/ee84hX/09f95589-d2ed-4dc0-8074-92e1a427d539.png');
+                radial-gradient(ellipse at top left, rgba(255,215,0,.09), transparent 55%),
+                linear-gradient(135deg, #111, #050505);
             background-size: cover;
             background-position: center;
             min-height: 100vh;
@@ -295,10 +295,10 @@
             text-decoration:none;
         }
         .logo img{
-            height:60px;
-            width:auto;
+            height:96px;
+            width:240px;
             display:block;
-            object-fit:contain;
+            object-fit:cover;
         }
 
         .catalog-carousel{
@@ -564,7 +564,7 @@
         }
         @media (max-width: 560px) {
             .carousel-track .product-card { flex-basis: 88%; }
-            .logo img { height:48px; }
+            .logo img { width:190px; height:78px; }
             .carousel-hint { font-size:.78rem; }
         }
 
@@ -625,7 +625,7 @@
             .nav-links {
                 display: none;
                 position: absolute;
-                top: 67px;
+                top: 100%;
                 left: 0;
                 width: 100%;
                 background: var(--black);
@@ -638,7 +638,7 @@
             .nav-links.active { display: flex; }
             .menu-toggle { display: block; }
             .products-grid, .features-grid, .trust-row, .about-stats { grid-template-columns: 1fr; }
-            .hero { padding-top: 100px; }
+            .hero { padding-top: 148px; }
             .hero-grid, section { padding-left: 1rem; padding-right: 1rem; }
             .contact-cta, .contact-info { padding: 1.3rem; }
             .section-header, .cta-strip { flex-direction: column; align-items: flex-start; }
@@ -651,8 +651,8 @@
 <body>
     <header>
         <nav>
-            <a class="logo" href="#home" aria-label="Shekinah Auto Center">
-                <img src="https://i.im.ge/eeRjAy/Design_sem_nome_1_.png" alt="Logo Shekinah Auto Center">
+            <a class="logo" href="#home" aria-label="Centro Automotivo Shekinah">
+                <img src="assets/logo-centro-automotivo-shekinah.jpg" alt="Logo Centro Automotivo Shekinah">
             </a>
             <button class="menu-toggle" type="button" aria-label="Abrir menu" aria-expanded="false">
                 <i class="fas fa-bars"></i>
@@ -676,7 +676,7 @@
                         <i class="fas fa-screwdriver-wrench"></i>
                         <span>Pneus • Peças • Serviços • Av Timbiras 447</span>
                     </div>
-                    <h1>Auto center com catálogo inteligente e atendimento rápido</h1>
+                    <h1>Centro Automotivo Shekinah: cuidado completo para o seu carro</h1>
                     <p>Consulte pneus, peças e serviços automotivos. Peça orçamento direto no WhatsApp e combine a retirada na loja.</p>
                     <div class="cta-row">
                         <a href="https://wa.me/559293022416" class="cta-button js-whatsapp" target="_blank" rel="noopener noreferrer"><i class="fab fa-whatsapp" aria-hidden="true"></i> Falar no WhatsApp</a>
@@ -688,7 +688,7 @@
                     <!-- O banner cadastrado no ADM é carregado pela API.
                          Esta arte local permanece como padrão se não houver campanha disponível. -->
                     <a class="promotion-banner js-whatsapp" href="https://wa.me/559293022416" target="_blank" rel="noopener noreferrer" aria-label="Consultar pneus, peças e serviços no WhatsApp">
-                        <img src="assets/banner-home.svg" width="1080" height="1080" alt="Auto Center Shekinah. Pneus, peças e serviços. Cuidado completo para o seu carro." fetchpriority="high">
+                        <img src="assets/banner-home.svg" width="1080" height="1080" alt="Centro Automotivo Shekinah. Pneus, peças e serviços. Cuidado completo para o seu carro." fetchpriority="high">
                     </a>
                     <a class="cta-button js-whatsapp" href="https://wa.me/559293022416" target="_blank" rel="noopener noreferrer"><i class="fab fa-whatsapp" aria-hidden="true"></i> Pedir orçamento no WhatsApp</a>
                 </div>
@@ -805,7 +805,8 @@
     <footer>
         <div class="footer-content">
             <div class="footer-section">
-                <h3>Shekinah Auto Center</h3>
+                <img src="assets/logo-centro-automotivo-shekinah.jpg" alt="Centro Automotivo Shekinah" width="240" height="135" loading="lazy" style="display:block;max-width:100%;height:auto;margin-bottom:1rem">
+                <h3>Centro Automotivo Shekinah</h3>
                 <p style="color: var(--text-muted);">Catálogo automotivo, pneus e serviços com atendimento pelo WhatsApp.</p>
                 <div class="social-links">
                     <a href="https://www.instagram.com/autocentershekinah_?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
@@ -817,7 +818,7 @@
             <div class="footer-section"><h3>Serviços</h3><ul><li>Pneus</li><li>Alinhamento</li><li>Balanceamento</li><li>Produtos automotivos</li></ul></div>
             <div class="footer-section"><h3>Endereço</h3><ul><li>Av Timbiras 447</li><li>Manaus - AM</li><li><a class="js-whatsapp" href="https://wa.me/559293022416">Chamar no WhatsApp</a></li></ul></div>
         </div>
-        <div class="footer-bottom">© <span id="currentYear"></span> Shekinah Auto Center. Todos os direitos reservados.</div>
+        <div class="footer-bottom">© <span id="currentYear"></span> Centro Automotivo Shekinah. Todos os direitos reservados.</div>
     </footer>
 
     <a href="https://wa.me/559293022416" class="whatsapp-float js-whatsapp" aria-label="Chamar no WhatsApp"><i class="fab fa-whatsapp"></i></a>
@@ -827,7 +828,7 @@
         const ADDRESS = "Av Timbiras 447";
         const MODE = "Somente retirada na loja";
         const API_URL = "https://shekinah-api-mocha.vercel.app/api";
-        const WELCOME_MSG = "Olá! Vim pelo site da Shekinah Auto Center e quero atendimento.";
+        const WELCOME_MSG = "Olá! Vim pelo site do Centro Automotivo Shekinah e quero atendimento.";
 
         const fallbackProducts = [
             { id: 1, category: "Pneus", title: "Pneu 175/70 R14", description: "Opção para carros populares. Consulte marca disponível.", price: 0, tags: ["aro 14", "consulta"] },
@@ -932,12 +933,12 @@
         }
 
         function buyProduct(title, price) {
-            const msg = `Olá! Vim pelo site da Shekinah Auto Center.\n\nQuero consultar/comprar (${MODE}): ${title}\nPreço no site: ${formatBRL(price)}\nEndereço: ${ADDRESS}\n\nPode me passar disponibilidade e formas de pagamento?`;
+            const msg = `Olá! Vim pelo site do Centro Automotivo Shekinah.\n\nQuero consultar/comprar (${MODE}): ${title}\nPreço no site: ${formatBRL(price)}\nEndereço: ${ADDRESS}\n\nPode me passar disponibilidade e formas de pagamento?`;
             window.open(getWhatsAppLink(msg), "_blank", "noopener,noreferrer");
         }
 
         function quoteProduct(title) {
-            const msg = `Olá! Vim pelo site da Shekinah Auto Center e quero um orçamento para: ${title}. Pode me informar a disponibilidade?`;
+            const msg = `Olá! Vim pelo site do Centro Automotivo Shekinah e quero um orçamento para: ${title}. Pode me informar a disponibilidade?`;
             window.open(getWhatsAppLink(msg), "_blank", "noopener,noreferrer");
         }
 
