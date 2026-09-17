@@ -4,7 +4,7 @@ Site estático em HTML, CSS e JavaScript. Para pré-visualizar, sirva a raiz com
 
 ## Banner da página inicial
 
-- A área é quadrada e responsiva (proporção 1:1), preparada para artes de **1080 × 1080 pixels**, sem recorte.
+- A área é vertical e responsiva (proporção 4:5), preparada para artes de **1080 × 1350 pixels**, sem recorte.
 - As campanhas agora são enviadas pelo **Shekinah-ADM**, na seção **Banner do site**, sem editar o HTML a cada troca.
 - O site lê `GET /api/banner` na mesma API do catálogo e pré-carrega a imagem antes de substituir a arte padrão. Sem banner, com API indisponível ou imagem inválida, mantém `assets/banner-home.svg`.
 - O texto alternativo vem da descrição preenchida no painel. O destino do clique continua sendo o WhatsApp da loja.
