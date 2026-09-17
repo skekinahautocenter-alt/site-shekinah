@@ -178,7 +178,7 @@
         .promotion-banner {
             display: block;
             width: 100%;
-            aspect-ratio: 1 / 1;
+            aspect-ratio: 4 / 5;
             background: var(--black-light);
             border: 1px solid rgba(255,215,0,.55);
             border-radius: 20px;
@@ -688,7 +688,7 @@
                     <!-- O banner cadastrado no ADM é carregado pela API.
                          Esta arte local permanece como padrão se não houver campanha disponível. -->
                     <a class="promotion-banner js-whatsapp" href="https://wa.me/559293022416" target="_blank" rel="noopener noreferrer" aria-label="Consultar pneus, peças e serviços no WhatsApp">
-                        <img src="assets/banner-home.svg" width="1080" height="1080" alt="Centro Automotivo Shekinah. Pneus, peças e serviços. Cuidado completo para o seu carro." fetchpriority="high">
+                        <img src="assets/banner-home.svg" width="1080" height="1350" alt="Centro Automotivo Shekinah. Pneus, peças e serviços. Cuidado completo para o seu carro." fetchpriority="high">
                     </a>
                     <a class="cta-button js-whatsapp" href="https://wa.me/559293022416" target="_blank" rel="noopener noreferrer"><i class="fab fa-whatsapp" aria-hidden="true"></i> Pedir orçamento no WhatsApp</a>
                 </div>
@@ -1082,7 +1082,7 @@
                 const response = await fetch(`${API_URL}/banner`, { cache: "no-store", signal: AbortSignal.timeout(10000) });
                 if (!response.ok) return;
                 const { banner } = await response.json();
-                if (!banner || banner.width !== 1080 || banner.height !== 1080 || typeof banner.altText !== "string") return;
+                if (!banner || banner.width !== 1080 || ![1080, 1350].includes(banner.height) || typeof banner.altText !== "string") return;
                 const url = new URL(banner.imageUrl, `${API_URL}/`);
                 if (url.origin !== new URL(API_URL).origin || url.pathname !== "/api/banner/image") return;
                 const preview = new Image();
@@ -1092,7 +1092,7 @@
                     preview.onerror = () => { clearTimeout(timer); reject(new Error("Banner unavailable")); };
                     preview.src = url.href;
                 });
-                if (preview.naturalWidth !== 1080 || preview.naturalHeight !== 1080) return;
+                if (preview.naturalWidth !== 1080 || preview.naturalHeight !== banner.height) return;
                 const fallback = image.getAttribute("src");
                 const fallbackAlt = image.alt;
                 const fallbackLabel = link.getAttribute("aria-label");
